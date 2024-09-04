@@ -1,5 +1,5 @@
 # PHASE 1 - Download & Install JDK
-FROM ghcr.io/graalvm/jdk-community:21 as build
+FROM ghcr.io/graalvm/jdk-community:21
 WORKDIR app
 ADD ./build/libs/advanced_jpa-1.0.jar /app/
 EXPOSE 8080
