@@ -15,7 +15,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Builder
 @Entity
 @Table(name = "products")
@@ -33,7 +32,7 @@ public class Product extends Auditable{
 
     private BigDecimal price;
     @ManyToOne
-    @JoinColumn(name = "cate_id")
+    @JoinColumn(name = "category_id")
     private Category category;
     @ManyToMany
     @JoinTable(name = "product_prices",joinColumns = @JoinColumn(name = "product_id",referencedColumnName = "id"),

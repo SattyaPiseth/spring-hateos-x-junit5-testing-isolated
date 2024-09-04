@@ -1,22 +1,54 @@
 version: '3.8'
 # database PostgreSQL version
 services:
-  postgres:
-    image: postgres:latest
-    container_name: postgres_db
+  advanced-jpa-api:
+    image: "advanced-jpa:latest"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: advanced-jpa-api
+    ports:
+      - "15001:8080"
     environment:
-      POSTGRES_USER: pisethsattya
-      POSTGRES_PASSWORD:  springboot
-      POSTGRES_DB: advanced_jpa
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://advanced-jpa-db:5432/advanced_jpa_db
+      - SPRING_DATASOURCE_USERNAME=pisethsattya
+      - SPRING_DATASOURCE_PASSWORD=springboot
+    networks:
+      - advanced-jpa-network
+#    restart: always
+    depends_on:
+      - advanced-jpa-db
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:8080/ || exit 1" ]
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      timeout: 10s
+
+  advanced-jpa-db:
+    image: postgres:latest
+    container_name: advanced-jpa-db
     ports:
       - "5500:5432"
+    environment:
+      - POSTGRES_USER=pisethsattya
+      - POSTGRES_PASSWORD=springboot
+      - POSTGRES_DB=advanced_jpa_db
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck: # Add health check
-      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER}" ]
-      interval: 10s
-      retries: 5
-      timeout: 5s
+      - advanced-jpa-volume:/var/lib/postgresql/data
+    networks:
+      - advanced-jpa-network
+
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER" ]
+      interval: 30s
+      retries: 3
+      start_period: 30s
+      timeout: 10s
 
 volumes:
-  postgres_data:
+  advanced-jpa-volume:
+
+networks:
+  advanced-jpa-network:
+    driver: bridge

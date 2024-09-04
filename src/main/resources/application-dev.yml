@@ -1,0 +1,5 @@
+DB_HOST: localhost
+DB_PORT: 5500
+DB_NAME: advanced_jpa_db
+DB_USERNAME: pisethsattya
+DB_PASSWORD: springboot

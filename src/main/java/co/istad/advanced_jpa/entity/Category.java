@@ -23,6 +23,7 @@ public class Category extends Auditable {
     private Long id;
 
     private String name;
+
     @OneToMany(mappedBy = "category")
     private List<Product> products;
 }
