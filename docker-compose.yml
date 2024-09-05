@@ -19,11 +19,12 @@ services:
     depends_on:
       - advanced-jpa-db
     healthcheck:
-      test: [ "CMD-SHELL", "curl -f http://localhost:8080/ || exit 1" ]
+      test: [ "CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1" ]
       interval: 30s
       retries: 3
       start_period: 30s
       timeout: 10s
+
 
   advanced-jpa-db:
     image: postgres:latest
@@ -43,8 +44,9 @@ services:
       test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER" ]
       interval: 30s
       retries: 3
-      start_period: 30s
+      start_period: 90s # Increased start period to give more time for Postgres to initialize
       timeout: 10s
+
 
 volumes:
   advanced-jpa-volume:

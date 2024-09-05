@@ -17,6 +17,17 @@ spring:
     properties:
       hibernate:
         format_sql: true
+    open-in-view: false
 springdoc:
   swagger-ui:
     path: docs
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+  endpoint:
+    health:
+      show-details: always
