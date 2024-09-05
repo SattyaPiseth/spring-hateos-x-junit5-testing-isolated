@@ -8,6 +8,10 @@ spring:
     name: spring-hateos-x-unit-test
   profiles:
     active: dev
+  security:
+    allowed-origin: ${ALLOW_ORIGIN}
+    allowed-method: ${ALLOW_METHOD}
+    allowed-header: ${ALLOW_HEADER}
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -18,9 +22,14 @@ spring:
       hibernate:
         format_sql: true
     open-in-view: false
+
+
 springdoc:
   swagger-ui:
     path: docs
+  api-docs:
+    enabled: true
+
 
 management:
   endpoints:
@@ -31,3 +40,6 @@ management:
   endpoint:
     health:
       show-details: always
+
+server:
+  port: 8080

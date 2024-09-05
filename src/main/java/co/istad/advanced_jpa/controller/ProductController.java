@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
+
     @GetMapping
     public CollectionModel<?> findProducts(){
         return productService.findProducts();

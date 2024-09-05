@@ -1,8 +1,8 @@
-DB_HOST: localhost
+DB_HOST: spring-hateos.techinsights.guru
 DB_PORT: 5500
 DB_NAME: advanced_jpa_db
 DB_USERNAME: pisethsattya
 DB_PASSWORD: springboot
-ALLOW_ORIGIN: http://localhost:8080
+ALLOW_ORIGIN: https://spring-hateos.techinsights.guru
 ALLOW_METHOD: GET,POST,PATCH,DELETE
 ALLOW_HEADER: "*"
