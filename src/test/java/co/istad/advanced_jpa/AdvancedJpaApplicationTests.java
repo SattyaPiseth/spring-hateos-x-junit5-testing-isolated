@@ -76,20 +76,6 @@ class AdvancedJpaApplicationTests {
 		assertFalse(categories.isEmpty(), "Category list should not be empty");
 		categories.forEach(category -> System.out.println(category.getName()));
 	}
-	// Test cases for Product Repository
-//	@Test
-//	void whenFindProductByNameAndUuid_thenReturnProduct(){
-//		// Arrange
-//		String name = "macBook Pro M1";
-//		String uuid = "0ab59952-bd95-48e2-9941-fe9fb505e4d8";
-//
-//		// Act
-//		Optional<Product> product = productRepository.findByNameIgnoreCaseAndUuid(name,uuid);
-//
-//		// Assert
-//		assertTrue(product.isPresent(),"Product should be present");
-//		System.out.println(product.get().getName());
-//	}
 	@Test
 	void whenFindAllProducts_thenReturnProductList(){
 		// Act
