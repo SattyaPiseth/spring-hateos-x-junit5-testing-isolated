@@ -34,7 +34,7 @@ public class ProductController {
     }
     @PatchMapping("/{uuid}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateProduct(@PathVariable String uuid, @RequestBody @Valid ProductDto productDto){
+    public void updateProduct(@PathVariable String uuid, @RequestBody ProductDto productDto){
         productService.updateProduct(uuid, productDto);
     }
     @DeleteMapping("/{uuid}")
