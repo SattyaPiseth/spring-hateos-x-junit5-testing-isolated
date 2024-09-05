@@ -27,6 +27,8 @@ spring:
 springdoc:
   swagger-ui:
     path: docs
+    display-request-duration: true
+    default-model-expand-depth: 2
   api-docs:
     enabled: true
 
@@ -43,3 +45,6 @@ management:
 
 server:
   port: 8080
+  ssl:
+    enabled: false # SSL is handled by nginx
+
