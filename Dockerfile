@@ -7,7 +7,7 @@ RUN chmod +x ./gradlew
 RUN ./gradlew clean build
 
 # Production stage
-FROM openjdk:21-jdk-alpine
+FROM openjdk:21-jdk
 WORKDIR /app
 COPY --from=build /app/build/libs/*.jar /app/app.jar
 EXPOSE 8080
