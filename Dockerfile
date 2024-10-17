@@ -6,7 +6,7 @@
 # ENTRYPOINT ["java","-jar","-Dspring.profiles.active=stage","/app/advanced_jpa-1.0.jar"]
 
 # Use GraalVM JDK Community edition 21 as the base image
-FROM ghcr.io/graalvm/jdk-community:21
+FROM ghcr.io/graalvm/jdk-community:21 as build
 
 # Set the working directory in the container
 WORKDIR /app
@@ -15,7 +15,7 @@ WORKDIR /app
 COPY gradlew .
 
 # Make gradlew executable
-RUN chmod +x gradlew
+RUN chmod 777 gradlew
 
 # Build the application (this may still cause issues)
 RUN ./gradlew clean build
