@@ -10,3 +10,5 @@ FROM ghcr.io/graalvm/jdk-community:21
 
 # Set the working directory in the container
 WORKDIR /app
+
+ENTRYPOINT ["ls","-a"]
