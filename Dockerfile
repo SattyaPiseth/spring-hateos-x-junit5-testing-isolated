@@ -7,7 +7,7 @@
 #------------------------------------------
 
 # PHASE 1 - Build the application
-FROM gradle:7.6.1-jdk21 AS build
+FROM ghcr.io/graalvm/jdk-community:21 AS build
 WORKDIR /app
 COPY . .
 RUN gradle build -x test
