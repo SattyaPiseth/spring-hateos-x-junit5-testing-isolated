@@ -1,11 +1,11 @@
-# PHASE 1 - Download & Install JDK
-FROM ghcr.io/graalvm/jdk-community:21 AS build
-WORKDIR app
-ADD . /app/
-RUN ./gradlew clean build
+FROM gradle:7.5-jdk17 AS build
+WORKDIR /app
+COPY --chown=gradle:gradle . /app/
+
+RUN gradle clean build
 
 FROM openjdk:17-alpine
 WORKDIR /app
-COPY --from=build /app/target/*.jar /app/app.jar
+COPY --from=build /app/build/libs/*.jar /app/app.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","-Dspring.profiles.active=stage","app.jar"]
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=stage", "app.jar"]
