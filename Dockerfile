@@ -10,12 +10,3 @@ FROM ghcr.io/graalvm/jdk-community:21
 
 # Set the working directory in the container
 WORKDIR /app
-
-# Copy the application JAR file
-COPY ./build/libs/advanced_jpa-1.0.jar app/
-
-# Expose the port the application runs on
-EXPOSE 8080
-
-# Run the application with the specified Spring profile
-CMD ["java", "-jar", "-Dspring.profiles.active=stage", "/app/advanced_jpa-1.0.jar"]
