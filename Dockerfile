@@ -11,7 +11,18 @@ FROM ghcr.io/graalvm/jdk-community:21
 # Set the working directory in the container
 WORKDIR /app
 
-COPY . /app/
+# Copy the gradlew wrapper
+COPY gradlew .
 
+# Make gradlew executable
+RUN chmod +x gradlew
+
+# Build the application (this may still cause issues)
 RUN ./gradlew clean build
+
+# Alternative approach: copy compiled artifacts instead of building
+# COPY target/*.jar app.jar
+
+# Run your Java application
+# CMD ["java", "-jar", "app.jar"]
 
