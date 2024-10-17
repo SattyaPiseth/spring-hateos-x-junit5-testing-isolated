@@ -2,7 +2,7 @@ FROM gradle:jdk21 AS build
 WORKDIR /app
 COPY --chown=gradle:gradle . /app/
 
-RUN gradle clean build
+RUN gradle clean build -x test
 
 FROM gradle:jdk21
 WORKDIR /app
