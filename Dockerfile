@@ -13,4 +13,5 @@ WORKDIR /app
 
 COPY . /app/
 
-RUN ./gradlew clean build -x test
+RUN ./gradlew clean build
+
