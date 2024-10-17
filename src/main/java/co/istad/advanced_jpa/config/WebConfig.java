@@ -23,9 +23,9 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**") // Enable CORS only for your API endpoints
-                .allowedOrigins(String.valueOf(allowedOrigin)) // Allow all trusted domains
-                .allowedMethods(String.valueOf(allowedMethod)) // Restrict HTTP methods
-                .allowedHeaders(String.valueOf(allowedHeader)) // You can restrict to specific headers like "Authorization"
+                .allowedOrigins(allowedOrigin.toArray(new String[0])) // Allow all trusted domains
+                .allowedMethods(allowedMethod.toArray(new String[0])) // Restrict HTTP methods
+                .allowedHeaders(allowedHeader.toArray(new String[0])) // You can restrict to specific headers like "Authorization"
                 .allowCredentials(true) // Enable cookies or other credentials
                 .maxAge(3600); // Cache pre-flight requests for 1 hour
     }
