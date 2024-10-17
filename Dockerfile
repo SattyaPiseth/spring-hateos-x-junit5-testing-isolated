@@ -1,10 +1,10 @@
-FROM gradle:7.5-jdk17 AS build
+FROM gradle:jdk21 AS build
 WORKDIR /app
 COPY --chown=gradle:gradle . /app/
 
 RUN gradle clean build
 
-FROM openjdk:17-alpine
+FROM gradle:jdk21
 WORKDIR /app
 COPY --from=build /app/build/libs/*.jar /app/app.jar
 EXPOSE 8080
