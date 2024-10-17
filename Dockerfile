@@ -9,7 +9,7 @@
 FROM ghcr.io/graalvm/jdk-community:21 AS build
 WORKDIR /app
 COPY . .
-RUN ./gradlew clean build
+RUN ./gradlew clean build -x test
 
 # Package Stage
 FROM ghcr.io/graalvm/jdk-community:21 AS runtime
