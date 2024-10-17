@@ -4,7 +4,7 @@
 # ADD ./build/libs/advanced_jpa-1.0.jar /app/
 # EXPOSE 8080
 # ENTRYPOINT ["java","-jar","-Dspring.profiles.active=stage","/app/advanced_jpa-1.0.jar"]
-------------------------------------------
+#------------------------------------------
 # Build Stage
 FROM ghcr.io/graalvm/jdk-community:21 AS build
 WORKDIR /app
