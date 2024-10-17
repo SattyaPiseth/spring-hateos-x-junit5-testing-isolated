@@ -1,10 +1,13 @@
-FROM gradle:7.5-jdk17 AS build
+# Build stage
+FROM ghcr.io/graalvm/jdk-community:21 AS build
 WORKDIR /app
-COPY --chown=gradle:gradle . /app/
+ADD . /app/
 
-RUN gradle clean build
+RUN chmod +x ./gradlew
+RUN ./gradlew clean build
 
-FROM openjdk:17-alpine
+# Production stage
+FROM openjdk:21-jdk-alpine
 WORKDIR /app
 COPY --from=build /app/build/libs/*.jar /app/app.jar
 EXPOSE 8080
