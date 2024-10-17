@@ -1,6 +1,21 @@
-PHASE 1 - Download & Install JDK
+# PHASE 1 - Download & Install JDK
+# FROM ghcr.io/graalvm/jdk-community:21
+# WORKDIR app
+# ADD ./build/libs/advanced_jpa-1.0.jar /app/
+# EXPOSE 8080
+# ENTRYPOINT ["java","-jar","-Dspring.profiles.active=stage","/app/advanced_jpa-1.0.jar"]
+
+# Use GraalVM JDK Community edition 21 as the base image
 FROM ghcr.io/graalvm/jdk-community:21
-WORKDIR app
-ADD ./build/libs/advanced_jpa-1.0.jar /app/
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the application JAR file
+COPY ./build/libs/advanced_jpa-1.0.jar app/
+
+# Expose the port the application runs on
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","-Dspring.profiles.active=stage","/app/advanced_jpa-1.0.jar"]
+
+# Run the application with the specified Spring profile
+CMD ["java", "-jar", "-Dspring.profiles.active=stage", "/app/advanced_jpa-1.0.jar"]
