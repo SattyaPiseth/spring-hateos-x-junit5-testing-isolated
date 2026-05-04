@@ -1,8 +1,7 @@
-DB_HOST: advanced-jpa-db
-DB_PORT: 5432
-DB_NAME: advanced_jpa_db
-DB_USERNAME: pisethsattya
-DB_PASSWORD: springboot
-ALLOW_ORIGIN: http://localhost:9865
-ALLOW_METHOD: GET,POST,PATCH,DELETE
-ALLOW_HEADER: "*"
+SPRING_DATASOURCE_URL=jdbc:postgresql://advanced-jpa-db:5432/advanced_jpa_db
+SPRING_DATASOURCE_USERNAME=pisethsattya
+SPRING_DATASOURCE_PASSWORD=springboot
+
+ALLOW_ORIGIN=*
+ALLOW_METHOD=GET,POST,PATCH,DELETE
+ALLOW_HEADER=*
