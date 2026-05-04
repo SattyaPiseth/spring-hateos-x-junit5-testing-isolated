@@ -1,8 +1,26 @@
 version: '3.8'
-# database PostgreSQL version
+
 services:
+  advanced-jpa-db:
+    image: postgres:16
+    container_name: advanced-jpa-db
+    environment:
+      POSTGRES_USER: pisethsattya
+      POSTGRES_PASSWORD: springboot
+      POSTGRES_DB: advanced_jpa_db
+    ports:
+      - "5500:5432"
+    volumes:
+      - advanced-jpa-volume:/var/lib/postgresql/data
+    networks:
+      - advanced-jpa-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pisethsattya -d advanced_jpa_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   advanced-jpa-api:
-    image: "advanced-jpa:latest"
     build:
       context: .
       dockerfile: Dockerfile
@@ -10,43 +28,20 @@ services:
     ports:
       - "9865:8080"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://advanced-jpa-db:5432/advanced_jpa_db
-      - SPRING_DATASOURCE_USERNAME=pisethsattya
-      - SPRING_DATASOURCE_PASSWORD=springboot
-    networks:
-      - advanced-jpa-network
-#    restart: always
+      SPRING_DATASOURCE_URL: jdbc:postgresql://advanced-jpa-db:5432/advanced_jpa_db
+      SPRING_DATASOURCE_USERNAME: pisethsattya
+      SPRING_DATASOURCE_PASSWORD: springboot
+      SPRING_PROFILES_ACTIVE: dev
     depends_on:
       - advanced-jpa-db
-    healthcheck:
-      test: [ "CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1" ]
-      interval: 30s
-      retries: 3
-      start_period: 30s
-      timeout: 10s
-
-
-  advanced-jpa-db:
-    image: postgres:latest
-    container_name: advanced-jpa-db
-    ports:
-      - "5500:5432"
-    environment:
-      - POSTGRES_USER=pisethsattya
-      - POSTGRES_PASSWORD=springboot
-      - POSTGRES_DB=advanced_jpa_db
-    volumes:
-      - advanced-jpa-volume:/var/lib/postgresql/data
     networks:
       - advanced-jpa-network
-
+    restart: always
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB" ]
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"]
       interval: 30s
-      retries: 3
-      start_period: 90s # Increased start period to give more time for Postgres to initialize
       timeout: 10s
-
+      retries: 3
 
 volumes:
   advanced-jpa-volume:
