@@ -1,28 +1,46 @@
 spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
   application:
     name: spring-hateos-x-unit-test
+
   profiles:
     active: dev
-  security:
-    allowed-origin: ${ALLOW_ORIGIN}
-    allowed-method: ${ALLOW_METHOD}
-    allowed-header: ${ALLOW_HEADER}
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://advanced-jpa-db:5432/advanced_jpa_db}
+    username: ${SPRING_DATASOURCE_USERNAME:pisethsattya}
+    password: ${SPRING_DATASOURCE_PASSWORD:springboot}
+    hikari:
+      connection-timeout: 30000
+      initialization-fail-timeout: 60000
+      maximum-pool-size: 10
 
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: update   # dev only
     show-sql: true
     properties:
       hibernate:
         format_sql: true
     open-in-view: false
 
+  security:
+    allowed-origin: ${ALLOW_ORIGIN:*}
+    allowed-method: ${ALLOW_METHOD:GET,POST,PATCH,DELETE}
+    allowed-header: ${ALLOW_HEADER:*}
+
+server:
+  port: 8080
+  ssl:
+    enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
 
 springdoc:
   swagger-ui:
@@ -31,20 +49,3 @@ springdoc:
     default-model-expand-depth: 2
   api-docs:
     enabled: true
-
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info
-
-  endpoint:
-    health:
-      show-details: always
-
-server:
-  port: 8080
-  ssl:
-    enabled: false # SSL is handled by nginx
-
