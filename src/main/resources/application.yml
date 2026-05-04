@@ -7,7 +7,7 @@ spring:
   application:
     name: spring-hateos-x-unit-test
   profiles:
-    active: stage
+    active: dev
   security:
     allowed-origin: ${ALLOW_ORIGIN}
     allowed-method: ${ALLOW_METHOD}
