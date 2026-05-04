@@ -3,6 +3,6 @@ DB_PORT: 5500
 DB_NAME: advanced_jpa_db
 DB_USERNAME: pisethsattya
 DB_PASSWORD: springboot
-ALLOW_ORIGIN: http://localhost:9765
+ALLOW_ORIGIN: http://localhost:9865
 ALLOW_METHOD: GET,POST,PATCH,DELETE
 ALLOW_HEADER: "*"
